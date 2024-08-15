@@ -36,7 +36,8 @@ export default class CategoryItem extends Vue {
     }
 
     toggle() {
-        console.log(this.category); // Debug the category object structure
+        console.log("Category Name:", this.category.name);
+        console.log("Category Name as String:", JSON.stringify(this.category.name));
         this.isOpen = !this.isOpen;
     }
 }
