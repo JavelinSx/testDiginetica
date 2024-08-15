@@ -75,5 +75,6 @@ export default class CategoryItem extends Vue {
 
 .subcategory-item {
     width: 100%;
+    min-height: 30px;
 }
 </style>
