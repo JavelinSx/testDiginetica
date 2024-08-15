@@ -2,7 +2,7 @@
     <div class="category-item-wrapper">
         <div class="category-item" @click="toggle"
             :class="{ 'has-children': category.subcategories && category.subcategories.length }">
-            <span class="category-name">{{ category.name }}</span>
+            <span class="category-name">{{ category.name ? category.name.toString() : '' }}</span>
             <span v-if="category.subcategories && category.subcategories.length" class="toggle-icon">
                 {{ category.subcategories.length }}
             </span>
@@ -26,15 +26,17 @@ interface Category {
 @Component
 export default class CategoryItem extends Vue {
     @Prop({ required: true }) readonly category!: Category;
-
     isOpen: boolean = false;
+
     @Watch('parentIsOpen')
     onParentOpenChange(newValue: boolean) {
         if (!newValue) {
             this.isOpen = false;
         }
     }
+
     toggle() {
+        console.log(this.category); // Debug the category object structure
         this.isOpen = !this.isOpen;
     }
 }
@@ -52,8 +54,6 @@ export default class CategoryItem extends Vue {
     cursor: pointer;
     padding: 5px;
     min-height: 30px;
-
-    &.has-children {}
 
     &:hover {
         background-color: #f0f0f0;
