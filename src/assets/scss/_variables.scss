@@ -1,9 +1,11 @@
-$primary-color: #333333;
-$secondary-color: #aaaaaa;
-$white-color: #ffffff;
-$hover-background: #e2efff;
-$hover-color: #125bae;
-$border-color: #73aff4;
+$blue500: #7397f5;
+$blue400: #73aff4;
+$blue800: #125bae;
+$grey100: #e2efff;
+$grey300: #f8f8fa;
+$grey400: #aaaaaa;
+$grey800: #333333;
+$white100: #ffffff;
 
 @mixin flex-col-cen {
   display: flex;
@@ -11,17 +13,29 @@ $border-color: #73aff4;
   align-items: center;
   justify-content: center;
 }
+@mixin flex-col-start-between {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
 @mixin flex-row-cen {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
 }
+@mixin flex-col-center-start {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
 @mixin flex-row-start {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
 }
 @mixin flex-row-between {
   display: flex;

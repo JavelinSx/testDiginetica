@@ -10,7 +10,7 @@ import { Prop, Vue, Component } from 'vue-property-decorator';
 @Component
 export default class BaseButton extends Vue {
 
-    @Prop({ required: true }) readonly styledType!: 'big' | 'small';
+    @Prop({ required: true }) readonly styledType!: 'big' | 'small' | 'full';
     @Prop({ required: true }) readonly text!: string;
     @Prop({ default: false }) readonly disabled!: boolean;
 
@@ -30,21 +30,21 @@ export default class BaseButton extends Vue {
     cursor: pointer;
     font-weight: 500;
     transition: all 0.3s ease;
-    border: 1px solid $border-color;
+    border: 1px solid $blue500;
     background-color: inherit;
 
     &:hover {
-        background-color: $border-color;
-        color: $white-color;
-        border: 1px solid $secondary-color;
+        background-color: $blue500;
+        color: $white100;
+        border: 1px solid $grey400;
     }
 
     &:disabled {
         opacity: 0.5;
         cursor: not-allowed;
-        background-color: $secondary-color;
-        color: $primary-color;
-        border: 1px solid $secondary-color;
+        background-color: $grey400;
+        color: $grey800;
+        border: 1px solid $grey400;
     }
 
     // Размеры
@@ -59,6 +59,17 @@ export default class BaseButton extends Vue {
         height: 38px;
         padding: 12px 16px;
         font-size: 14px;
+    }
+
+    &.full {
+        border-color: $grey400;
+        color: $grey400;
+        width: 100%;
+        height: 38px;
+        padding: 12px 16px;
+        font-size: 12px;
+        position: absolute;
+        bottom: 0;
     }
 
 }

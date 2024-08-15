@@ -1,6 +1,6 @@
 <template>
-    <div class="logo-conteiner">
-        <iconLogo class="logo-img" />
+    <div class="logo-container">
+        <IconLogo class="logo-img" />
         <p>Логотип</p>
     </div>
 </template>
@@ -17,14 +17,15 @@ import IconLogo from '../../assets/icon/icon-logo.svg';
 export default class Logo extends Vue { }
 </script>
 <style lang="scss" scoped>
-.logo-conteiner {
+.logo-container {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     height: 48px;
-    width: 145px;
+    min-width: 145px;
     cursor: pointer;
+    margin-right: -16px;
 }
 
 .logo-img {

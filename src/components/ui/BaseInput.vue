@@ -6,7 +6,7 @@
             <input :id="id" v-model="innerValue" :type="type" :placeholder="placeholder" :value="value" @input="onInput"
                 :class="['base-input', styledType, { 'with-icon': icon }]">
             <span v-if="staticPlaceholder" class="static-placeholder">{{ staticPlaceholder }}</span>
-            <component v-if="iconReset" :is="iconReset" class="input-icon-reset" @click="onReset" />
+            <component v-if="innerValue.length > 0" :is="iconReset" class="input-icon-reset" @click="onReset" />
         </div>
     </div>
 </template>
@@ -59,7 +59,14 @@ label {
 }
 
 .input-wrapper {
-    width: 100%;
+    @media screen and (max-width: 480px) {
+        width: 100%;
+
+    }
+
+    @media (min-width: 481px) {
+        width: auto;
+    }
 }
 
 .input-container {
@@ -82,20 +89,21 @@ label {
     &.input-nav-search {
         height: 48px;
         border-radius: 10px;
-        border: 1px solid $border-color;
+        border: 1px solid $blue400;
         outline: none;
         transition: .3s;
         padding: 16px 16px 12px 0px;
         font-size: 16px;
 
+
         &:focus-visible {
 
-            box-shadow: 0 0 3px 0 $border-color inset;
+            box-shadow: 0 0 3px 0 $blue400 inset;
 
         }
 
         @media screen and (max-width: 480px) {
-
+            width: 100%;
             border: none;
 
             &:focus-visible {
@@ -104,15 +112,25 @@ label {
             }
         }
 
+        @media (min-width: 481px) and (max-width: 1440px) {
+            width: 480px;
+            padding: 16px 16px 12px 48px;
+        }
+
+        @media (min-width: 1441px) {
+            width: 1015px;
+            padding: 16px 16px 12px 48px;
+        }
     }
 
 
     &.input-filter-search {
-        // Специфические стили для input-filter-search
+        padding-left: 50px;
+        padding-top: 12px;
     }
 
     &.input-filter-interval {
-        // Специфические стили для input-filter-interval
+        padding-left: 30px;
     }
 }
 
@@ -133,9 +151,22 @@ label {
     }
 }
 
+.input-icon-reset {
+    position: absolute;
+    right: 0;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    @media (min-width: 481px) {
+        right: 16px;
+    }
+}
+
 .static-placeholder {
     position: absolute;
-    right: 0.5rem;
+    left: 0.5rem;
     color: #999;
     pointer-events: none;
 }
