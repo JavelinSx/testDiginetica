@@ -9,7 +9,7 @@
         </div>
         <ul class="subcategory-list" v-if="category.subcategories && isOpen">
             <li class="subcategory-item" v-for="subcategory in category.subcategories" :key="subcategory.name">
-                <CategoryItem :category="subcategory" />
+                <CategoryItem :category="subcategory" :key="isOpen" />
             </li>
         </ul>
     </div>
@@ -29,7 +29,7 @@ export default class CategoryItem extends Vue {
 
     isOpen: boolean = false;
 
-    toggle(): void {
+    toggle() {
         this.isOpen = !this.isOpen;
     }
 }
@@ -45,7 +45,7 @@ export default class CategoryItem extends Vue {
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    padding: 5px 0;
+    padding: 5px;
     min-height: 30px;
 
     &.has-children {}
