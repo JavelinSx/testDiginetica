@@ -9,14 +9,14 @@
         </div>
         <ul class="subcategory-list" v-if="category.subcategories && isOpen">
             <li class="subcategory-item" v-for="subcategory in category.subcategories" :key="subcategory.name">
-                <CategoryItem :category="subcategory" :key="isOpen" />
+                <CategoryItem :category="subcategory" :parentIsOpen="isOpen" />
             </li>
         </ul>
     </div>
 </template>
 
 <script lang="ts">
-import { Prop, Vue, Component } from 'vue-property-decorator';
+import { Prop, Vue, Component, Watch } from 'vue-property-decorator';
 
 interface Category {
     name: string;
@@ -28,7 +28,12 @@ export default class CategoryItem extends Vue {
     @Prop({ required: true }) readonly category!: Category;
 
     isOpen: boolean = false;
-
+    @Watch('parentIsOpen')
+    onParentOpenChange(newValue: boolean) {
+        if (!newValue) {
+            this.isOpen = false;
+        }
+    }
     toggle() {
         this.isOpen = !this.isOpen;
     }
