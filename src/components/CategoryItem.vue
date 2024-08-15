@@ -1,43 +1,32 @@
 <template>
     <div class="category-item-wrapper">
-        <div class="category-item" @click="toggle"
-            :class="{ 'has-children': category.subcategories && category.subcategories.length }">
-            <span class="category-name">{{ category.name ? category.name.toString() : '' }}</span>
+        <div class="category-item" @click="toggle">
+            <span class="category-name">{{ category.name }}</span>
             <span v-if="category.subcategories && category.subcategories.length" class="toggle-icon">
                 {{ category.subcategories.length }}
             </span>
         </div>
-        <ul class="subcategory-list" v-if="category.subcategories && isOpen">
-            <li class="subcategory-item" v-for="subcategory in category.subcategories" :key="subcategory.name">
-                <CategoryItem :category="subcategory" :parentIsOpen="isOpen" />
-            </li>
-        </ul>
+        <SubcategoryItem v-if="category.subcategories && isOpen" :subcategories="category.subcategories" />
     </div>
 </template>
 
 <script lang="ts">
-import { Prop, Vue, Component, Watch } from 'vue-property-decorator';
+import { Prop, Vue, Component } from 'vue-property-decorator';
+import SubcategoryItem from './SubcategoryItem.vue';
 
 interface Category {
     name: string;
     subcategories?: Category[];
 }
 
-@Component
+@Component({
+    components: { SubcategoryItem }
+})
 export default class CategoryItem extends Vue {
     @Prop({ required: true }) readonly category!: Category;
     isOpen: boolean = false;
 
-    @Watch('parentIsOpen')
-    onParentOpenChange(newValue: boolean) {
-        if (!newValue) {
-            this.isOpen = false;
-        }
-    }
-
     toggle() {
-        console.log("Category Name:", this.category.name);
-        console.log("Category Name as String:", JSON.stringify(this.category.name));
         this.isOpen = !this.isOpen;
     }
 }
@@ -54,7 +43,7 @@ export default class CategoryItem extends Vue {
     align-items: center;
     cursor: pointer;
     padding: 5px;
-    min-height: 30px;
+    line-height: 30px;
 
     &:hover {
         background-color: #f0f0f0;
@@ -67,15 +56,5 @@ export default class CategoryItem extends Vue {
 
 .toggle-icon {
     margin-left: 5px;
-}
-
-.subcategory-list {
-    list-style-type: none;
-    padding-left: 15px;
-}
-
-.subcategory-item {
-    width: 100%;
-    min-height: 30px;
 }
 </style>

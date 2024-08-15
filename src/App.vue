@@ -21,6 +21,7 @@
       </mq-layout>
     </div>
   </div>
+
 </template>
 
 <script lang="ts">
@@ -68,7 +69,7 @@ export default class App extends Vue {
 
 .desktop-layout {
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .filter-sidebar {
